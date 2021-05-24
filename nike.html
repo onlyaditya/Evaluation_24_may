@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Nike</title>
+    <style type="text/css">
+        #cont {
+            width: 90vw;
+            margin: auto;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #left {
+            width: 25%;
+            border-right: 1px solid black;
+        }
+
+        #left,
+        #data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        input {
+            width: 50%;
+            height: 20px;
+            margin: 15px auto;
+        }
+
+        #left>button {
+            width: 30%;
+            height: 50px;
+            margin: 20px auto;
+
+        }
+
+        #data {
+            margin-top: 100px;
+        }
+
+        #right {
+            width: 75%;
+            display: flex;
+            flex-direction: row;
+            flex-flow: wrap;
+        }
+
+        .product {
+            margin: 30px;
+            width: 25%;
+            height: 350px;
+            min-width: 250px;
+            border: 1px solid black;
+        }
+
+        .product>img {
+            width: 100%;
+        }
+
+        .product>button {
+            width: 40%;
+            height: 40px;
+            margin-left: 4.5%;
+            margin-right: 4.5%;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .product>div {
+            margin: 5px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .product>p {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cont">
+        <div id="left">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="price" placeholder="Price">
+            <input type="text" id="description" placeholder="Description">
+            <input type="text" id="estimated" placeholder="Estimated Delivery">
+            <input type="text" id="image" placeholder="Image Url(optional)">
+            <button onclick="addProduct()">Add Product</button>
+
+        </div>
+
+
+        <div id="right">
+            <div class="product">
+                <p>1</p>
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bmlrZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" />
+                <div id="name">Running Shoes</div>
+                <div>Price:350 RS</div>
+                <div>Catagory : Footwear</div>
+                <div>Estimated Delivery: 1 July</div>
+                <button id="remove">Remove</button>
+                <button id="update">Update Price</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var product_num = 1;
+
+    var content = document.getElementById('right');
+    var price_update = document.getElementById('update');
+    price_update.addEventListener('click', update);
+
+
+    function addProduct() {
+        var product_num = product_num + 1;
+        var name = document.getElementById('name').value;
+        var price = document.getElementById('price').value;
+        var desc = document.getElementById('description').value;
+        var est = document.getElementById('estimated').value;
+        var image = document.getElementById('image').value;
+        var res = document.createElement('div');
+        res.setAttribute('class', 'product');
+        res.setAttribute('id', product_num);
+        res.innerHTML = `
+                <img src="${image}" />
+                <div id="name">${name}</div>
+                <div>Price: ${price}RS</div>
+                <div>Catagory : ${desc}</div>
+                <div>Estimated Delivery: ${est}</div>
+                <button id="remove" onclick = "remove_content()">Remove</button>
+                <button id="update" onclick = "update()">Update Price</button>`;
+
+        content.appendChild(res);
+
+    }
+
+    function remove_content() {
+        var res = document.getElementsByTagName(this.product_num);
+        remove_content(res);
+
+    }
+
+    function update() {
+        var new_price = window.prompt("Enter new price");
+        var p = this.name;
+        p.innerHTML = `${new_price}`;
+
+    }
+
+
+
+</script>
